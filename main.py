@@ -1,4 +1,5 @@
 import glob
+import os
 # PIV　data sorting
 
 
@@ -14,12 +15,16 @@ def getIndexedElementFromFile(filename, indexOfElement=4):
 
 
 files = glob.glob("*_PIV3_disp.txt")
+files.sort(key=os.path.getmtime)
+
+print('Files found: ' + str(files))
 result = []
 for file in files:
     elements = getIndexedElementFromFile(file, 3)
-    result.append(sum(float(e) for e in elements))
-    
-    print(file + ":" +str(result))
+    total = sum(float(e) for e in elements)
+    result.append(total)
+
+    print(file + ":" + str(total))
 
 
 newTxt = open('result.txt', "w+")
