@@ -18,11 +18,13 @@ result = []
 for file in files:
     elements = getIndexedElementFromFile(file, 3)
     result.append(sum(float(e) for e in elements))
-
-    print(result)
+    
+    print(file + ":" +str(result))
 
 
 newTxt = open('result.txt', "w+")
 for e in result:
     newTxt.write(str(e)+'\n')
 newTxt.close()
+
+input("Press Enter to continue...")
