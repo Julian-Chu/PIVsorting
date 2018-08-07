@@ -1,32 +1,28 @@
 import glob
 # PIV　data sorting
 
-print('Hello world')
-files = glob.glob("*.txt")
-print(files)
-
-
-filename = files[0]
-print(filename)
-with open(filename) as f_obj:
-    for line in f_obj:
-        print(line.rstrip())
-        print(len(line))
-
 
 def getIndexedElementFromFile(filename, indexOfElement=4):
     file = open(filename)
     linesOfFile = file.readlines()
+    file.close()
     targets = []
     for line in linesOfFile:
         target = line.split()[indexOfElement]
-        print(target)
         targets.append(target)
     return targets
 
 
-result = getIndexedElementFromFile(files[0], 3)
-print(result)
-print(sum(int(e) for e in result))
+files = glob.glob("*_PIV3_disp.txt")
+result = []
+for file in files:
+    elements = getIndexedElementFromFile(file, 3)
+    result.append(sum(int(e) for e in elements))
 
-newTxt = open('new.txt', "w+")
+    print(result)
+
+
+newTxt = open('result.txt', "w+")
+for e in result:
+    newTxt.write(str(e)+'\n')
+newTxt.close()
