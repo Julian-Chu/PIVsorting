@@ -17,7 +17,7 @@ files = glob.glob("*_PIV3_disp.txt")
 result = []
 for file in files:
     elements = getIndexedElementFromFile(file, 3)
-    result.append(sum(int(e) for e in elements))
+    result.append(sum(float(e) for e in elements))
 
     print(result)
 
