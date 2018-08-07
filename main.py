@@ -20,7 +20,7 @@ files.sort(key=os.path.getmtime)
 print('Files found: ' + str(files))
 result = []
 for file in files:
-    elements = getIndexedElementFromFile(file, 3)
+    elements = getIndexedElementFromFile(file, 4)
     total = sum(float(e) for e in elements)
     result.append(total)
 
