@@ -14,6 +14,16 @@ def getIndexedElementFromFile(filename, indexOfElement=4):
     return targets
 
 
+def getAvgExcludeZero(nums):
+    target = [num for num in nums if num != 0]
+    print(target)
+    if len(target) == 0:
+        avg = 0
+    else:
+        avg = float(target[0]) / len(target)
+    return avg
+
+
 files = glob.glob("*_PIV3_disp.txt")
 files.sort(key=os.path.getmtime)
 
@@ -22,14 +32,16 @@ result = []
 for file in files:
     elements = getIndexedElementFromFile(file, 4)
     total = sum(float(e) for e in elements)
-    result.append(total)
+    avg = getAvgExcludeZero(elements)
 
-    print(file + ":" + str(total))
+    result.append([total, avg])
+
+    print(file + ":" + str(total) + " " + str(avg))
 
 
-newTxt = open('result.txt', "w+")
-for e in result:
-    newTxt.write(str(e)+'\n')
-newTxt.close()
+with open('result.txt', "w+") as newTxt:
+    newTxt.write("sum avg variance \n")
+    for e in result:
+        newTxt.write(str(e[0])+' '+str(e[1])+'\n')
 
 input("Press Enter to continue...")
