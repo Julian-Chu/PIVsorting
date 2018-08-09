@@ -9,13 +9,12 @@ def getIndexedElementFromFile(filename, indexOfElement=4):
     targets = []
     for line in linesOfFile:
         target = line.split()[indexOfElement]
-        targets.append(target)
+        targets.append(float(target))
     return targets
 
 
 def getAvgExcludeZero(nums):
-    target = [float(num) for num in nums if num != '0']
-    print(target)
+    target = [num for num in nums if num != 0]
     if len(target) == 0:
         avg = 0
     else:
@@ -24,8 +23,7 @@ def getAvgExcludeZero(nums):
 
 
 def getVarExcludeZero(nums):
-    target = [float(num) for num in nums if num != '0']
-    print(target)
+    target = [num for num in nums if num != 0]
     if len(target) == 0:
         var = 0
     else:
@@ -41,7 +39,7 @@ print('Files found: ' + str(files))
 result = []
 for file in files:
     elements = getIndexedElementFromFile(file, 4)
-    total = sum(float(e) for e in elements)
+    total = sum(elements)
     avg = getAvgExcludeZero(elements)
     var = getVarExcludeZero(elements)
 
